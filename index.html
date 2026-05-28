@@ -7,23 +7,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0f1117;
-    --surface: #1a1d27;
-    --surface2: #222636;
-    --border: #2e3347;
-    --accent: #4f79e0;
-    --accent-dim: #3558b0;
-    --gold: #e8b84b;
-    --green: #3dba7e;
-    --green-dim: #1e6147;
-    --green-bg: #0f2e22;
-    --red: #e05454;
-    --red-bg: #2a0f0f;
-    --yellow: #e8b84b;
-    --yellow-bg: #2a220a;
-    --muted: #6b7280;
-    --text: #e2e8f0;
-    --text-soft: #94a3b8;
+    --bg: #f5f6fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f8;
+    --border: #dde1ed;
+    --accent: #3558c8;
+    --accent-dim: #2544a8;
+    --gold: #b07d1a;
+    --green: #1a7a50;
+    --green-dim: #145e3c;
+    --green-bg: #e8f7ef;
+    --red: #c03030;
+    --red-bg: #fdeaea;
+    --yellow: #8a5c00;
+    --yellow-bg: #fff8e1;
+    --muted: #888fa0;
+    --text: #1a1d2e;
+    --text-soft: #4a5068;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -37,10 +37,13 @@
     line-height: 1.6;
   }
 
+  .topbar { background: var(--surface); border-bottom: 1px solid var(--border); }
+  .class-block { box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .role-card { box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .open-item { box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+
   /* TOP BAR */
   .topbar {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
     padding: 12px 24px;
     display: flex;
     align-items: center;
@@ -48,7 +51,7 @@
   }
   .topbar-badge {
     background: var(--accent);
-    color: #fff;
+    color: #ffffff;
     font-size: 10px;
     font-weight: 600;
     letter-spacing: 1.5px;
@@ -75,13 +78,15 @@
     text-align: center;
     position: relative;
     overflow: hidden;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
   }
   .hero::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--accent), var(--gold), var(--accent), transparent);
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--gold), var(--accent));
   }
   .hero-eyebrow {
     font-family: 'JetBrains Mono', monospace;
@@ -116,6 +121,7 @@
     border-radius: 12px;
     padding: 16px 28px;
     min-width: 220px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
   }
   .class-pill-label {
     font-family: 'JetBrains Mono', monospace;
@@ -241,7 +247,7 @@
     text-align: left;
     padding: 10px 18px;
     border-bottom: 1px solid var(--border);
-    background: var(--surface);
+    background: var(--surface2);
   }
   .meal-table td {
     padding: 12px 18px;
@@ -250,7 +256,7 @@
     vertical-align: top;
   }
   .meal-table tr:last-child td { border-bottom: none; }
-  .meal-table tr:hover td { background: rgba(79,121,224,0.04); }
+  .meal-table tr:hover td { background: rgba(53,88,200,0.04); }
 
   .day-label {
     font-weight: 600;
@@ -321,6 +327,7 @@
     display: flex;
     gap: 12px;
     align-items: flex-start;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
   }
   .open-item.urgent { border-left: 3px solid var(--red); }
   .open-item.medium { border-left: 3px solid var(--yellow); }
@@ -366,6 +373,7 @@
     font-size: 12px;
     color: var(--muted);
     border-top: 1px solid var(--border);
+    background: var(--surface);
     font-family: 'JetBrains Mono', monospace;
   }
 
@@ -387,7 +395,7 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-eyebrow">Kingdom Ministry School</div>
+  <div class="hero-eyebrow">Bellwood Kingdom Hall</div>
   <div class="hero-title">Pioneer Service School <span>2026</span></div>
   <div class="hero-sub">Coordinator Hub — Bellwood Kingdom Hall</div>
   <div class="hero-classes">
