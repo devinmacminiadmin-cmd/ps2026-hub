@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pioneer Service School 2026 — Coordinator Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #222636;
+    --border: #2e3347;
+    --accent: #4f79e0;
+    --accent-dim: #3558b0;
+    --gold: #e8b84b;
+    --green: #3dba7e;
+    --green-dim: #1e6147;
+    --green-bg: #0f2e22;
+    --red: #e05454;
+    --red-bg: #2a0f0f;
+    --yellow: #e8b84b;
+    --yellow-bg: #2a220a;
+    --muted: #6b7280;
+    --text: #e2e8f0;
+    --text-soft: #94a3b8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* TOP BAR */
+  .topbar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .topbar-badge {
+    background: var(--accent);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .topbar-title {
+    font-size: 13px;
+    color: var(--text-soft);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .topbar-updated {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 56px 24px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), var(--gold), var(--accent), transparent);
+  }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .hero-title {
+    font-size: clamp(32px, 7vw, 64px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+  }
+  .hero-title span { color: var(--gold); }
+  .hero-sub {
+    font-size: 15px;
+    color: var(--text-soft);
+    margin-bottom: 32px;
+  }
+  .hero-classes {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .class-pill {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 28px;
+    min-width: 220px;
+  }
+  .class-pill-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .class-pill-dates {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .class-pill-loc {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* SECTION HEADER */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 48px 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-icon { font-size: 20px; }
+  .section-title {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .section-sub {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    margin-left: auto;
+  }
+
+  /* ROLES GRID */
+  .roles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .role-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .role-card-label {
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .role-card-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .role-card-note {
+    font-size: 12px;
+    color: var(--text-soft);
+  }
+
+  /* CLASSES SPLIT */
+  .classes-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  @media (max-width: 700px) {
+    .classes-split { grid-template-columns: 1fr; }
+  }
+
+  .class-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .class-block-header {
+    background: var(--surface2);
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .class-block-title {
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .class-block-dates {
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--gold);
+    margin-left: auto;
+  }
+
+  /* MEAL TABLE */
+  .meal-table { width: 100%; border-collapse: collapse; }
+  .meal-table th {
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 10px 18px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .meal-table td {
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    vertical-align: top;
+  }
+  .meal-table tr:last-child td { border-bottom: none; }
+  .meal-table tr:hover td { background: rgba(79,121,224,0.04); }
+
+  .day-label {
+    font-weight: 600;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  .day-date {
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--muted);
+  }
+  .cong-name { font-weight: 500; }
+  .cong-lead {
+    font-size: 11px;
+    color: var(--text-soft);
+    margin-top: 2px;
+  }
+  .menu-text {
+    font-size: 12px;
+    color: var(--text-soft);
+    line-height: 1.5;
+  }
+
+  /* STATUS BADGES */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    padding: 3px 9px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .badge-green {
+    background: var(--green-bg);
+    color: var(--green);
+    border: 1px solid #1e4a35;
+  }
+  .badge-yellow {
+    background: var(--yellow-bg);
+    color: var(--yellow);
+    border: 1px solid #4a3a12;
+  }
+  .badge-red {
+    background: var(--red-bg);
+    color: var(--red);
+    border: 1px solid #4a1414;
+  }
+  .badge-muted {
+    background: #1a1d27;
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+
+  /* OPEN ITEMS */
+  .open-items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 10px;
+  }
+  .open-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .open-item.urgent { border-left: 3px solid var(--red); }
+  .open-item.medium { border-left: 3px solid var(--yellow); }
+  .open-item.low { border-left: 3px solid var(--muted); }
+  .open-item-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .open-item-text {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .open-item-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 3px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* NOT PARTICIPATING */
+  .np-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .np-icon { font-size: 18px; }
+  .np-name { font-weight: 500; font-size: 14px; }
+  .np-reason { font-size: 12px; color: var(--muted); }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 32px 24px;
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 40px 16px 32px; }
+    .container { padding: 0 16px 60px; }
+    .meal-table .menu-col { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <span class="topbar-badge">Internal</span>
+  <span class="topbar-title">pioneer-school-2026 · coordinator-hub</span>
+  <span class="topbar-updated">Updated 2026-05-28</span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Kingdom Ministry School</div>
+  <div class="hero-title">Pioneer Service School <span>2026</span></div>
+  <div class="hero-sub">Coordinator Hub — Bellwood Kingdom Hall</div>
+  <div class="hero-classes">
+    <div class="class-pill">
+      <div class="class-pill-label">Class 1</div>
+      <div class="class-pill-dates">June 22–27</div>
+      <div class="class-pill-loc">Bellwood Kingdom Hall</div>
+    </div>
+    <div class="class-pill">
+      <div class="class-pill-label">Class 2</div>
+      <div class="class-pill-dates">August 3–8</div>
+      <div class="class-pill-loc">Bellwood Kingdom Hall</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ONSITE TEAM -->
+  <div class="section-header">
+    <span class="section-icon">👥</span>
+    <span class="section-title">Onsite Team</span>
+  </div>
+  <div class="roles-grid">
+    <div class="role-card">
+      <div class="role-card-label">Onsite Lead — Class 1</div>
+      <div class="role-card-name">Jimmy Davenport</div>
+    </div>
+    <div class="role-card">
+      <div class="role-card-label">Onsite Lead — Class 2</div>
+      <div class="role-card-name">Kenneth King</div>
+      <div class="role-card-note">KennethK4@jwpub.org</div>
+    </div>
+    <div class="role-card">
+      <div class="role-card-label">AV Operator (Both Classes)</div>
+      <div class="role-card-name">Joanathon Zinninger</div>
+    </div>
+    <div class="role-card">
+      <div class="role-card-label">Hall Setup — Class 1</div>
+      <div class="role-card-name">Macias Edwardo</div>
+    </div>
+    <div class="role-card">
+      <div class="role-card-label">Hall Setup — Class 2</div>
+      <div class="role-card-name">Aaron Finley</div>
+    </div>
+    <div class="role-card">
+      <div class="role-card-label">AV Equipment Delivery</div>
+      <div class="role-card-name">Kent Minor</div>
+      <div class="role-card-note">Delivers Sun Jun 21 · stays for Class 2</div>
+    </div>
+  </div>
+
+  <!-- CLASS 1 LUNCHES -->
+  <div class="section-header">
+    <span class="section-icon">🍽️</span>
+    <span class="section-title">Class 1 — Lunches</span>
+    <span class="section-sub">June 22–27 · 5 of 6 menus confirmed</span>
+  </div>
+  <div class="class-block">
+    <table class="meal-table">
+      <thead>
+        <tr>
+          <th style="width:100px">Day</th>
+          <th>Congregation</th>
+          <th class="menu-col">Menu</th>
+          <th style="width:120px">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="day-label">Monday</div><div class="day-date">Jun 22</div></td>
+          <td>
+            <div class="cong-name">Bellwood</div>
+            <div class="cong-lead">Bro. Damiano Trupiano</div>
+          </td>
+          <td class="menu-col"><div class="menu-text">Chicken piccata, bread, salad, mozzarella w/ tomato &amp; basil, tiramisu, beans w/ almonds, watermelon</div></td>
+          <td><span class="badge badge-green">✓ Menu in</span></td>
+        </tr>
+        <tr>
+          <td><div class="day-label">Tuesday</div><div class="day-date">Jun 23</div></td>
+          <td>
+            <div class="cong-name">Elmwood Park</div>
+            <div class="cong-lead">Glen Crayton Jr. · (708) 420-1429</div>
+          </td>
+          <td class="menu-col"><div class="menu-text">—</div></td>
+          <td><span class="badge badge-yellow">⚠ Menu needed</span></td>
+        </tr>
+        <tr>
+          <td><div class="day-label">Wednesday</div><div class="day-date">Jun 24</div></td>
+          <td>
+            <div class="cong-name">Carol Stream</div>
+            <div class="cong-lead">Gary Stanford</div>
+          </td>
+          <td class="menu-col"><div class="menu-text">Grilled Italian sausages, baked mostaccioli, chopped salad, drinks, dessert</div></td>
+          <td><span class="badge badge-green">✓ Menu in</span></td>
+        </tr>
+        <tr>
+          <td><div class="day-label">Thursday</div><div class="day-date">Jun 25</div></td>
+          <td>
+            <div class="cong-name">Addison</div>
+            <div class="cong-lead">John Thompson</div>
+          </td>
+          <td class="menu-col"><div class="menu-text">Green salad w/ vinaigrette, pasta w/ vodka sauce, eggplant parmigiano, Chicken Vesuvio and/or sausage w/ sweet peppers, dessert</div></td>
+          <td><span class="badge badge-green">✓ Menu in</span></td>
+        </tr>
+        <tr>
+          <td><div class="day-label">Friday</div><div class="day-date">Jun 26</div></td>
+          <td>
+            <div class="cong-name">Douglas Park</div>
+            <div class="cong-lead">Lead TBD</div>
+          </td>
+          <td class="menu-col"><div class="menu-text">Pizza party (multiple varieties incl. vegan/GF), Caesar &amp; garden salad, breadsticks &amp; mozzarella sticks w/ marinara, drinks, desserts</div></td>
+          <td><span class="badge badge-green">✓ Menu in</span></td>
+        </tr>
+        <tr>
+          <td><div class="day-label">Saturday</div><div class="day-date">Jun 27</div></td>
+          <td>
+            <div class="cong-name">Broadview</div>
+            <div class="cong-lead">Bro. Neal</div>
+          </td>
+          <td class="menu-col"><div class="menu-text">Finger sandwiches, chips, soup, fruit salad, salad, dessert</div></td>
+          <td><span class="badge badge-green">✓ Menu in</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CLASS 1 BREAKFASTS -->
+  <div class="section-header">
+    <span class="section-icon">☕</span>
+    <span class="section-title">Class 1 — Breakfasts</span>
+    <span class="section-sub">Provided by Class 2 congregations · 2 of 6 confirmed</span>
+  </div>
+  <div class="class-block">
+    <table class="meal-table">
+      <thead>
+        <tr>
+          <th style="width:100px">Day</th>
+          <th>Congregation</th>
+          <th style="width:140px">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="day-label">Monday</div><div class="day-date">Jun 22</div></td>
+          <td><div class="cong-name">TBD</div></td>
+          <td><span class="badge badge-muted">⏳ Pending</span></td>
+        </tr>
+        <tr>
+          <td><div class="day-label">Tuesday</div><div class="day-date">Jun 23</div></td>
+          <td><div class="cong-name">TBD</div></td>
+          <td><span class="badge badge-muted">⏳ Pending</span></td>
+        </tr>
+        <tr>
+          <td><div class="day-label">Wednesday</div><div class="day-date">Jun 24</div></td>
+          <td><div class="cong-name">TBD</div></td>
+          <td><span class="badge badge-muted">⏳ Pending</span></td>
+        </tr>
+        <tr>
+          <td><div class="day-label">Thursday</div><div class="day-date">Jun 25</div></td>
+          <td>
+            <div class="cong-name">Brookfield</div>
+            <div class="cong-lead">Scott Jarzemski</div>
+          </td>
+          <td><span class="badge badge-green">✓ Confirmed</span></td>
+        </tr>
+        <tr>
+          <td><div class="day-label">Friday</div><div class="day-date">Jun 26</div></td>
+          <td>
+            <div class="cong-name">North Oak Park</div>
+            <div class="cong-lead">Reg Simmons</div>
+          </td>
+          <td><span class="badge badge-green">✓ Confirmed</span></td>
+        </tr>
+        <tr>
+          <td><div class="day-label">Saturday</div><div class="day-date">Jun 27</div></td>
+          <td><div class="cong-name">TBD</div></td>
+          <td><span class="badge badge-muted">⏳ Pending</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CLASS 2 LUNCHES -->
+  <div class="section-header">
+    <span class="section-icon">🍽️</span>
+    <span class="section-title">Class 2 — Lunches</span>
+    <span class="section-sub">August 3–8 · Day assignments TBD</span>
+  </div>
+  <div class="class-block">
+    <table class="meal-table">
+      <thead>
+        <tr>
+          <th style="width:100px">Day</th>
+          <th>Congregation</th>
+          <th style="width:140px">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="day-label">Monday</div><div class="day-date">Aug 3</div></td>
+          <td>
+            <div class="cong-name">Hawthorne Square</div>
+            <div class="cong-lead">Day TBD</div>
+          </td>
+          <td><span class="badge badge-green">✓ Confirmed</span></td>
+        </tr>
+        <tr>
+          <td><div class="day-label">Tuesday</div><div class="day-date">Aug 4</div></td>
+          <td><div class="cong-name">TBD — to assign</div></td>
+          <td><span class="badge badge-muted">⏳ Pending</span></td>
+        </tr>
+        <tr>
+          <td><div class="day-label">Wednesday</div><div class="day-date">Aug 5</div></td>
+          <td>
+            <div class="cong-name">Norwood Park</div>
+            <div class="cong-lead">Day TBD</div>
+          </td>
+          <td><span class="badge badge-green">✓ Confirmed</span></td>
+        </tr>
+        <tr>
+          <td><div class="day-label">Thursday</div><div class="day-date">Aug 6</div></td>
+          <td><div class="cong-name">TBD — to assign</div></td>
+          <td><span class="badge badge-muted">⏳ Pending</span></td>
+        </tr>
+        <tr>
+          <td><div class="day-label">Friday</div><div class="day-date">Aug 7</div></td>
+          <td>
+            <div class="cong-name">North Oak Park</div>
+          </td>
+          <td><span class="badge badge-green">✓ Confirmed</span></td>
+        </tr>
+        <tr>
+          <td><div class="day-label">Saturday</div><div class="day-date">Aug 8</div></td>
+          <td>
+            <div class="cong-name">South Oak Park or Van Buren</div>
+            <div class="cong-lead">Both confirmed — day TBD</div>
+          </td>
+          <td><span class="badge badge-green">✓ Confirmed</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CLASS 2 BREAKFASTS -->
+  <div class="section-header">
+    <span class="section-icon">☕</span>
+    <span class="section-title">Class 2 — Breakfasts</span>
+    <span class="section-sub">Provided by Class 1 congregations · Details TBD</span>
+  </div>
+  <div class="class-block" style="padding: 24px 18px; color: var(--muted); font-size: 13px; font-family: 'JetBrains Mono', monospace;">
+    Assignments not yet determined — details pending Class 2 coordination
+  </div>
+
+  <!-- OPEN ITEMS -->
+  <div class="section-header">
+    <span class="section-icon">⚠️</span>
+    <span class="section-title">Open Items</span>
+    <span class="section-sub" id="open-count">loading...</span>
+  </div>
+  <div class="open-items-grid">
+    <div class="open-item urgent">
+      <div class="open-item-dot" style="border-color: var(--red);"></div>
+      <div>
+        <div class="open-item-text">Get Elmwood Park Tuesday menu</div>
+        <div class="open-item-sub">Glen Crayton Jr. · (708) 420-1429</div>
+      </div>
+    </div>
+    <div class="open-item medium">
+      <div class="open-item-dot" style="border-color: var(--yellow);"></div>
+      <div>
+        <div class="open-item-text">Assign Class 1 breakfasts — Mon, Tue, Wed, Sat</div>
+        <div class="open-item-sub">4 days still unassigned</div>
+      </div>
+    </div>
+    <div class="open-item medium">
+      <div class="open-item-dot" style="border-color: var(--yellow);"></div>
+      <div>
+        <div class="open-item-text">Assign specific days to Class 2 lunch congos</div>
+        <div class="open-item-sub">Hawthorne Sq, Norwood Park, Van Buren, South Oak Park</div>
+      </div>
+    </div>
+    <div class="open-item medium">
+      <div class="open-item-dot" style="border-color: var(--yellow);"></div>
+      <div>
+        <div class="open-item-text">Hear back from Proviso — Larry Collins</div>
+        <div class="open-item-sub">Last unconfirmed Class 2 congregation</div>
+      </div>
+    </div>
+    <div class="open-item low">
+      <div class="open-item-dot"></div>
+      <div>
+        <div class="open-item-text">Assign Class 2 breakfast arrangements</div>
+        <div class="open-item-sub">Aug 3–8 · Class 1 congs provide</div>
+      </div>
+    </div>
+    <div class="open-item low">
+      <div class="open-item-dot"></div>
+      <div>
+        <div class="open-item-text">Send formal lunch instructions to all confirmed congos</div>
+        <div class="open-item-sub">Draft ready</div>
+      </div>
+    </div>
+    <div class="open-item low">
+      <div class="open-item-dot"></div>
+      <div>
+        <div class="open-item-text">Send onsite meeting email to Davenport + King</div>
+        <div class="open-item-sub">Draft ready</div>
+      </div>
+    </div>
+    <div class="open-item low">
+      <div class="open-item-dot"></div>
+      <div>
+        <div class="open-item-text">ID lead brother for Douglas Park (Fri Jun 26)</div>
+        <div class="open-item-sub">Currently TBD</div>
+      </div>
+    </div>
+    <div class="open-item low">
+      <div class="open-item-dot"></div>
+      <div>
+        <div class="open-item-text">Confirm CO hall entry + ventilation</div>
+        <div class="open-item-sub">Contact: David Meaux (Bellwood CBOE)</div>
+      </div>
+    </div>
+    <div class="open-item low">
+      <div class="open-item-dot"></div>
+      <div>
+        <div class="open-item-text">Verify AV details with Kent Minor</div>
+        <div class="open-item-sub">Jun 21 delivery confirmed</div>
+      </div>
+    </div>
+    <div class="open-item low">
+      <div class="open-item-dot"></div>
+      <div>
+        <div class="open-item-text">Confirm audio broadcast doesn't reach restrooms/foyers/outside</div>
+        <div class="open-item-sub">School area only</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOT PARTICIPATING -->
+  <div class="section-header">
+    <span class="section-icon">🚫</span>
+    <span class="section-title">Not Participating</span>
+  </div>
+  <div style="display: flex; flex-direction: column; gap: 10px;">
+    <div class="np-card">
+      <div class="np-icon">🏗️</div>
+      <div>
+        <div class="np-name">Cicero</div>
+        <div class="np-reason">Hall under construction</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  pioneer-service-school-2026 · coordinator-hub · for internal use only
+</footer>
+
+<script>
+  // Count open items
+  const items = document.querySelectorAll('.open-item');
+  document.getElementById('open-count').textContent = items.length + ' items remaining';
+</script>
+
+</body>
+</html>
