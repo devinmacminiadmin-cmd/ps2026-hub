@@ -12,15 +12,16 @@
     --surface2: #f0f2f8;
     --border: #dde1ed;
     --accent: #3558c8;
-    --accent-dim: #2544a8;
     --gold: #b07d1a;
     --green: #1a7a50;
-    --green-dim: #145e3c;
     --green-bg: #e8f7ef;
+    --green-border: #a8ddc0;
     --red: #c03030;
     --red-bg: #fdeaea;
+    --red-border: #f0b8b8;
     --yellow: #8a5c00;
     --yellow-bg: #fff8e1;
+    --yellow-border: #f0d890;
     --muted: #888fa0;
     --text: #1a1d2e;
     --text-soft: #4a5068;
@@ -37,21 +38,22 @@
     line-height: 1.6;
   }
 
-  .topbar { background: var(--surface); border-bottom: 1px solid var(--border); }
-  .class-block { box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
-  .role-card { box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-  .open-item { box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-
   /* TOP BAR */
   .topbar {
-    padding: 12px 24px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 11px 24px;
     display: flex;
     align-items: center;
     gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
   }
   .topbar-badge {
     background: var(--accent);
-    color: #ffffff;
+    color: #fff;
     font-size: 10px;
     font-weight: 600;
     letter-spacing: 1.5px;
@@ -65,16 +67,35 @@
     color: var(--text-soft);
     font-family: 'JetBrains Mono', monospace;
   }
-  .topbar-updated {
+  .topbar-progress {
     margin-left: auto;
-    font-size: 11px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .progress-label {
+    font-size: 12px;
     color: var(--muted);
     font-family: 'JetBrains Mono', monospace;
+    white-space: nowrap;
+  }
+  .progress-bar-wrap {
+    width: 100px;
+    height: 6px;
+    background: var(--border);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--green);
+    border-radius: 99px;
+    transition: width 0.3s ease;
   }
 
   /* HERO */
   .hero {
-    padding: 56px 24px 48px;
+    padding: 52px 24px 44px;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -94,10 +115,10 @@
     letter-spacing: 4px;
     color: var(--accent);
     text-transform: uppercase;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
   .hero-title {
-    font-size: clamp(32px, 7vw, 64px);
+    font-size: clamp(30px, 6vw, 58px);
     font-weight: 700;
     line-height: 1.1;
     letter-spacing: -1px;
@@ -120,8 +141,8 @@
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 16px 28px;
-    min-width: 220px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    min-width: 210px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
   }
   .class-pill-label {
     font-family: 'JetBrains Mono', monospace;
@@ -135,14 +156,14 @@
     font-size: 18px;
     font-weight: 600;
     color: var(--gold);
-    margin-bottom: 4px;
+    margin-bottom: 3px;
   }
   .class-pill-loc {
     font-size: 12px;
     color: var(--muted);
   }
 
-  /* LAYOUT */
+  /* CONTAINER */
   .container {
     max-width: 1100px;
     margin: 0 auto;
@@ -153,18 +174,15 @@
   .section-header {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin: 48px 0 20px;
+    gap: 10px;
+    margin: 44px 0 18px;
     padding-bottom: 12px;
     border-bottom: 1px solid var(--border);
   }
-  .section-icon { font-size: 20px; }
-  .section-title {
-    font-size: 18px;
-    font-weight: 600;
-  }
+  .section-icon { font-size: 18px; }
+  .section-title { font-size: 17px; font-weight: 600; }
   .section-sub {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--muted);
     font-family: 'JetBrains Mono', monospace;
     margin-left: auto;
@@ -173,14 +191,15 @@
   /* ROLES GRID */
   .roles-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 10px;
   }
   .role-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 10px;
-    padding: 16px;
+    padding: 14px 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
   }
   .role-card-label {
     font-size: 10px;
@@ -188,55 +207,19 @@
     letter-spacing: 1.5px;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 6px;
+    margin-bottom: 5px;
   }
-  .role-card-name {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 2px;
-  }
-  .role-card-note {
-    font-size: 12px;
-    color: var(--text-soft);
-  }
+  .role-card-name { font-size: 14px; font-weight: 600; }
+  .role-card-note { font-size: 12px; color: var(--text-soft); margin-top: 2px; }
 
-  /* CLASSES SPLIT */
-  .classes-split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-  }
-  @media (max-width: 700px) {
-    .classes-split { grid-template-columns: 1fr; }
-  }
-
+  /* MEAL TABLE */
   .class-block {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
     overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
   }
-  .class-block-header {
-    background: var(--surface2);
-    padding: 14px 18px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .class-block-title {
-    font-weight: 600;
-    font-size: 14px;
-  }
-  .class-block-dates {
-    font-size: 11px;
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--gold);
-    margin-left: auto;
-  }
-
-  /* MEAL TABLE */
   .meal-table { width: 100%; border-collapse: collapse; }
   .meal-table th {
     font-size: 10px;
@@ -253,34 +236,24 @@
     padding: 12px 18px;
     border-bottom: 1px solid var(--border);
     font-size: 13px;
-    vertical-align: top;
+    vertical-align: middle;
   }
   .meal-table tr:last-child td { border-bottom: none; }
-  .meal-table tr:hover td { background: rgba(53,88,200,0.04); }
+  .meal-table tr { transition: background 0.15s; }
+  .meal-table tr:hover td { background: rgba(53,88,200,0.03); }
 
-  .day-label {
-    font-weight: 600;
-    font-size: 12px;
-    white-space: nowrap;
-  }
-  .day-date {
-    font-size: 10px;
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--muted);
-  }
+  /* Row done state */
+  .meal-table tr.row-done td { opacity: 0.45; }
+  .meal-table tr.row-done .day-label,
+  .meal-table tr.row-done .cong-name { text-decoration: line-through; }
+
+  .day-label { font-weight: 600; font-size: 12px; white-space: nowrap; }
+  .day-date { font-size: 10px; font-family: 'JetBrains Mono', monospace; color: var(--muted); }
   .cong-name { font-weight: 500; }
-  .cong-lead {
-    font-size: 11px;
-    color: var(--text-soft);
-    margin-top: 2px;
-  }
-  .menu-text {
-    font-size: 12px;
-    color: var(--text-soft);
-    line-height: 1.5;
-  }
+  .cong-lead { font-size: 11px; color: var(--text-soft); margin-top: 2px; }
+  .menu-text { font-size: 12px; color: var(--text-soft); line-height: 1.5; }
 
-  /* STATUS BADGES */
+  /* STATUS BADGES — clickable */
   .badge {
     display: inline-flex;
     align-items: center;
@@ -288,35 +261,26 @@
     font-size: 11px;
     font-family: 'JetBrains Mono', monospace;
     font-weight: 500;
-    padding: 3px 9px;
+    padding: 4px 10px;
     border-radius: 6px;
     white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    transition: opacity 0.15s, transform 0.1s;
+    border: 1px solid transparent;
   }
-  .badge-green {
-    background: var(--green-bg);
-    color: var(--green);
-    border: 1px solid #1e4a35;
-  }
-  .badge-yellow {
-    background: var(--yellow-bg);
-    color: var(--yellow);
-    border: 1px solid #4a3a12;
-  }
-  .badge-red {
-    background: var(--red-bg);
-    color: var(--red);
-    border: 1px solid #4a1414;
-  }
-  .badge-muted {
-    background: #1a1d27;
-    color: var(--muted);
-    border: 1px solid var(--border);
-  }
+  .badge:hover { opacity: 0.8; transform: scale(0.97); }
+  .badge:active { transform: scale(0.93); }
+
+  .badge-green { background: var(--green-bg); color: var(--green); border-color: var(--green-border); }
+  .badge-yellow { background: var(--yellow-bg); color: var(--yellow); border-color: var(--yellow-border); }
+  .badge-red { background: var(--red-bg); color: var(--red); border-color: var(--red-border); }
+  .badge-muted { background: var(--surface2); color: var(--muted); border-color: var(--border); }
 
   /* OPEN ITEMS */
   .open-items-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
     gap: 10px;
   }
   .open-item {
@@ -327,24 +291,52 @@
     display: flex;
     gap: 12px;
     align-items: flex-start;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s, opacity 0.2s, border-color 0.2s;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
   }
+  .open-item:hover { background: #f8f9ff; border-color: #c8cfe8; }
   .open-item.urgent { border-left: 3px solid var(--red); }
   .open-item.medium { border-left: 3px solid var(--yellow); }
-  .open-item.low { border-left: 3px solid var(--muted); }
-  .open-item-dot {
+  .open-item.low { border-left: 3px solid var(--border); }
+
+  /* Checked state */
+  .open-item.checked {
+    opacity: 0.45;
+    background: var(--surface2);
+    border-color: var(--border) !important;
+  }
+  .open-item.checked .open-item-text { text-decoration: line-through; color: var(--muted); }
+  .open-item.checked .item-checkbox { background: var(--green); border-color: var(--green); }
+  .open-item.checked .item-checkbox::after { opacity: 1; }
+
+  /* Custom checkbox */
+  .item-checkbox {
     width: 20px;
     height: 20px;
-    border-radius: 50%;
+    border-radius: 6px;
     border: 2px solid var(--border);
     flex-shrink: 0;
     margin-top: 1px;
+    background: #fff;
+    transition: background 0.15s, border-color 0.15s;
+    position: relative;
   }
-  .open-item-text {
-    font-size: 13px;
-    color: var(--text);
-    line-height: 1.5;
+  .item-checkbox::after {
+    content: '';
+    position: absolute;
+    top: 3px; left: 5px;
+    width: 6px; height: 9px;
+    border: 2px solid #fff;
+    border-top: none; border-left: none;
+    transform: rotate(45deg);
+    opacity: 0;
+    transition: opacity 0.15s;
   }
+  .open-item:hover .item-checkbox { border-color: var(--accent); }
+
+  .open-item-text { font-size: 13px; color: var(--text); line-height: 1.5; }
   .open-item-sub {
     font-size: 11px;
     color: var(--muted);
@@ -361,16 +353,34 @@
     display: flex;
     align-items: center;
     gap: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
   }
   .np-icon { font-size: 18px; }
   .np-name { font-weight: 500; font-size: 14px; }
   .np-reason { font-size: 12px; color: var(--muted); }
 
-  /* FOOTER */
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 24px; left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: #1a1d2e;
+    color: #fff;
+    font-size: 13px;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
+    z-index: 200;
+    pointer-events: none;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
   footer {
     text-align: center;
-    padding: 32px 24px;
-    font-size: 12px;
+    padding: 28px 24px;
+    font-size: 11px;
     color: var(--muted);
     border-top: 1px solid var(--border);
     background: var(--surface);
@@ -380,7 +390,8 @@
   @media (max-width: 600px) {
     .hero { padding: 40px 16px 32px; }
     .container { padding: 0 16px 60px; }
-    .meal-table .menu-col { display: none; }
+    .menu-col { display: none; }
+    .progress-bar-wrap { display: none; }
   }
 </style>
 </head>
@@ -389,15 +400,20 @@
 <!-- TOP BAR -->
 <div class="topbar">
   <span class="topbar-badge">Internal</span>
-  <span class="topbar-title">pioneer-school-2026 · coordinator-hub</span>
-  <span class="topbar-updated">Updated 2026-05-28</span>
+  <span class="topbar-title">pioneer-school-2026</span>
+  <div class="topbar-progress">
+    <span class="progress-label" id="progress-label">0 / 0 done</span>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+  </div>
 </div>
 
 <!-- HERO -->
 <div class="hero">
   <div class="hero-eyebrow">Bellwood Kingdom Hall</div>
   <div class="hero-title">Pioneer Service School <span>2026</span></div>
-  <div class="hero-sub">Coordinator Hub — Bellwood Kingdom Hall</div>
+  <div class="hero-sub">Coordinator Hub</div>
   <div class="hero-classes">
     <div class="class-pill">
       <div class="class-pill-label">Class 1</div>
@@ -452,7 +468,7 @@
   <div class="section-header">
     <span class="section-icon">🍽️</span>
     <span class="section-title">Class 1 — Lunches</span>
-    <span class="section-sub">June 22–27 · 5 of 6 menus confirmed</span>
+    <span class="section-sub">June 22–27 · click status to toggle</span>
   </div>
   <div class="class-block">
     <table class="meal-table">
@@ -461,63 +477,45 @@
           <th style="width:100px">Day</th>
           <th>Congregation</th>
           <th class="menu-col">Menu</th>
-          <th style="width:120px">Status</th>
+          <th style="width:130px">Status</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr data-row="c1l-mon">
           <td><div class="day-label">Monday</div><div class="day-date">Jun 22</div></td>
-          <td>
-            <div class="cong-name">Bellwood</div>
-            <div class="cong-lead">Bro. Damiano Trupiano</div>
-          </td>
+          <td><div class="cong-name">Bellwood</div><div class="cong-lead">Bro. Damiano Trupiano</div></td>
           <td class="menu-col"><div class="menu-text">Chicken piccata, bread, salad, mozzarella w/ tomato &amp; basil, tiramisu, beans w/ almonds, watermelon</div></td>
-          <td><span class="badge badge-green">✓ Menu in</span></td>
+          <td><span class="badge badge-green" data-badge="c1l-mon-badge" onclick="toggleBadge(this)">✓ Menu in</span></td>
         </tr>
-        <tr>
+        <tr data-row="c1l-tue">
           <td><div class="day-label">Tuesday</div><div class="day-date">Jun 23</div></td>
-          <td>
-            <div class="cong-name">Elmwood Park</div>
-            <div class="cong-lead">Glen Crayton Jr. · (708) 420-1429</div>
-          </td>
+          <td><div class="cong-name">Elmwood Park</div><div class="cong-lead">Glen Crayton Jr. · (708) 420-1429</div></td>
           <td class="menu-col"><div class="menu-text">—</div></td>
-          <td><span class="badge badge-yellow">⚠ Menu needed</span></td>
+          <td><span class="badge badge-yellow" data-badge="c1l-tue-badge" onclick="toggleBadge(this)">⚠ Menu needed</span></td>
         </tr>
-        <tr>
+        <tr data-row="c1l-wed">
           <td><div class="day-label">Wednesday</div><div class="day-date">Jun 24</div></td>
-          <td>
-            <div class="cong-name">Carol Stream</div>
-            <div class="cong-lead">Gary Stanford</div>
-          </td>
+          <td><div class="cong-name">Carol Stream</div><div class="cong-lead">Gary Stanford</div></td>
           <td class="menu-col"><div class="menu-text">Grilled Italian sausages, baked mostaccioli, chopped salad, drinks, dessert</div></td>
-          <td><span class="badge badge-green">✓ Menu in</span></td>
+          <td><span class="badge badge-green" data-badge="c1l-wed-badge" onclick="toggleBadge(this)">✓ Menu in</span></td>
         </tr>
-        <tr>
+        <tr data-row="c1l-thu">
           <td><div class="day-label">Thursday</div><div class="day-date">Jun 25</div></td>
-          <td>
-            <div class="cong-name">Addison</div>
-            <div class="cong-lead">John Thompson</div>
-          </td>
+          <td><div class="cong-name">Addison</div><div class="cong-lead">John Thompson</div></td>
           <td class="menu-col"><div class="menu-text">Green salad w/ vinaigrette, pasta w/ vodka sauce, eggplant parmigiano, Chicken Vesuvio and/or sausage w/ sweet peppers, dessert</div></td>
-          <td><span class="badge badge-green">✓ Menu in</span></td>
+          <td><span class="badge badge-green" data-badge="c1l-thu-badge" onclick="toggleBadge(this)">✓ Menu in</span></td>
         </tr>
-        <tr>
+        <tr data-row="c1l-fri">
           <td><div class="day-label">Friday</div><div class="day-date">Jun 26</div></td>
-          <td>
-            <div class="cong-name">Douglas Park</div>
-            <div class="cong-lead">Lead TBD</div>
-          </td>
+          <td><div class="cong-name">Douglas Park</div><div class="cong-lead">Lead TBD</div></td>
           <td class="menu-col"><div class="menu-text">Pizza party (multiple varieties incl. vegan/GF), Caesar &amp; garden salad, breadsticks &amp; mozzarella sticks w/ marinara, drinks, desserts</div></td>
-          <td><span class="badge badge-green">✓ Menu in</span></td>
+          <td><span class="badge badge-green" data-badge="c1l-fri-badge" onclick="toggleBadge(this)">✓ Menu in</span></td>
         </tr>
-        <tr>
+        <tr data-row="c1l-sat">
           <td><div class="day-label">Saturday</div><div class="day-date">Jun 27</div></td>
-          <td>
-            <div class="cong-name">Broadview</div>
-            <div class="cong-lead">Bro. Neal</div>
-          </td>
+          <td><div class="cong-name">Broadview</div><div class="cong-lead">Bro. Neal</div></td>
           <td class="menu-col"><div class="menu-text">Finger sandwiches, chips, soup, fruit salad, salad, dessert</div></td>
-          <td><span class="badge badge-green">✓ Menu in</span></td>
+          <td><span class="badge badge-green" data-badge="c1l-sat-badge" onclick="toggleBadge(this)">✓ Menu in</span></td>
         </tr>
       </tbody>
     </table>
@@ -527,7 +525,7 @@
   <div class="section-header">
     <span class="section-icon">☕</span>
     <span class="section-title">Class 1 — Breakfasts</span>
-    <span class="section-sub">Provided by Class 2 congregations · 2 of 6 confirmed</span>
+    <span class="section-sub">Provided by Class 2 congregations · click to confirm</span>
   </div>
   <div class="class-block">
     <table class="meal-table">
@@ -535,45 +533,39 @@
         <tr>
           <th style="width:100px">Day</th>
           <th>Congregation</th>
-          <th style="width:140px">Status</th>
+          <th style="width:150px">Status</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr data-row="c1b-mon">
           <td><div class="day-label">Monday</div><div class="day-date">Jun 22</div></td>
           <td><div class="cong-name">TBD</div></td>
-          <td><span class="badge badge-muted">⏳ Pending</span></td>
+          <td><span class="badge badge-muted" data-badge="c1b-mon-badge" onclick="toggleBadge(this)">⏳ Pending</span></td>
         </tr>
-        <tr>
+        <tr data-row="c1b-tue">
           <td><div class="day-label">Tuesday</div><div class="day-date">Jun 23</div></td>
           <td><div class="cong-name">TBD</div></td>
-          <td><span class="badge badge-muted">⏳ Pending</span></td>
+          <td><span class="badge badge-muted" data-badge="c1b-tue-badge" onclick="toggleBadge(this)">⏳ Pending</span></td>
         </tr>
-        <tr>
+        <tr data-row="c1b-wed">
           <td><div class="day-label">Wednesday</div><div class="day-date">Jun 24</div></td>
           <td><div class="cong-name">TBD</div></td>
-          <td><span class="badge badge-muted">⏳ Pending</span></td>
+          <td><span class="badge badge-muted" data-badge="c1b-wed-badge" onclick="toggleBadge(this)">⏳ Pending</span></td>
         </tr>
-        <tr>
+        <tr data-row="c1b-thu">
           <td><div class="day-label">Thursday</div><div class="day-date">Jun 25</div></td>
-          <td>
-            <div class="cong-name">Brookfield</div>
-            <div class="cong-lead">Scott Jarzemski</div>
-          </td>
-          <td><span class="badge badge-green">✓ Confirmed</span></td>
+          <td><div class="cong-name">Brookfield</div><div class="cong-lead">Scott Jarzemski</div></td>
+          <td><span class="badge badge-green" data-badge="c1b-thu-badge" onclick="toggleBadge(this)">✓ Confirmed</span></td>
         </tr>
-        <tr>
+        <tr data-row="c1b-fri">
           <td><div class="day-label">Friday</div><div class="day-date">Jun 26</div></td>
-          <td>
-            <div class="cong-name">North Oak Park</div>
-            <div class="cong-lead">Reg Simmons</div>
-          </td>
-          <td><span class="badge badge-green">✓ Confirmed</span></td>
+          <td><div class="cong-name">North Oak Park</div><div class="cong-lead">Reg Simmons</div></td>
+          <td><span class="badge badge-green" data-badge="c1b-fri-badge" onclick="toggleBadge(this)">✓ Confirmed</span></td>
         </tr>
-        <tr>
+        <tr data-row="c1b-sat">
           <td><div class="day-label">Saturday</div><div class="day-date">Jun 27</div></td>
           <td><div class="cong-name">TBD</div></td>
-          <td><span class="badge badge-muted">⏳ Pending</span></td>
+          <td><span class="badge badge-muted" data-badge="c1b-sat-badge" onclick="toggleBadge(this)">⏳ Pending</span></td>
         </tr>
       </tbody>
     </table>
@@ -583,7 +575,7 @@
   <div class="section-header">
     <span class="section-icon">🍽️</span>
     <span class="section-title">Class 2 — Lunches</span>
-    <span class="section-sub">August 3–8 · Day assignments TBD</span>
+    <span class="section-sub">August 3–8 · click to confirm</span>
   </div>
   <div class="class-block">
     <table class="meal-table">
@@ -591,50 +583,39 @@
         <tr>
           <th style="width:100px">Day</th>
           <th>Congregation</th>
-          <th style="width:140px">Status</th>
+          <th style="width:150px">Status</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr data-row="c2l-mon">
           <td><div class="day-label">Monday</div><div class="day-date">Aug 3</div></td>
-          <td>
-            <div class="cong-name">Hawthorne Square</div>
-            <div class="cong-lead">Day TBD</div>
-          </td>
-          <td><span class="badge badge-green">✓ Confirmed</span></td>
+          <td><div class="cong-name">Hawthorne Square</div><div class="cong-lead">Day TBD</div></td>
+          <td><span class="badge badge-green" data-badge="c2l-mon-badge" onclick="toggleBadge(this)">✓ Confirmed</span></td>
         </tr>
-        <tr>
+        <tr data-row="c2l-tue">
           <td><div class="day-label">Tuesday</div><div class="day-date">Aug 4</div></td>
           <td><div class="cong-name">TBD — to assign</div></td>
-          <td><span class="badge badge-muted">⏳ Pending</span></td>
+          <td><span class="badge badge-muted" data-badge="c2l-tue-badge" onclick="toggleBadge(this)">⏳ Pending</span></td>
         </tr>
-        <tr>
+        <tr data-row="c2l-wed">
           <td><div class="day-label">Wednesday</div><div class="day-date">Aug 5</div></td>
-          <td>
-            <div class="cong-name">Norwood Park</div>
-            <div class="cong-lead">Day TBD</div>
-          </td>
-          <td><span class="badge badge-green">✓ Confirmed</span></td>
+          <td><div class="cong-name">Norwood Park</div><div class="cong-lead">Day TBD</div></td>
+          <td><span class="badge badge-green" data-badge="c2l-wed-badge" onclick="toggleBadge(this)">✓ Confirmed</span></td>
         </tr>
-        <tr>
+        <tr data-row="c2l-thu">
           <td><div class="day-label">Thursday</div><div class="day-date">Aug 6</div></td>
           <td><div class="cong-name">TBD — to assign</div></td>
-          <td><span class="badge badge-muted">⏳ Pending</span></td>
+          <td><span class="badge badge-muted" data-badge="c2l-thu-badge" onclick="toggleBadge(this)">⏳ Pending</span></td>
         </tr>
-        <tr>
+        <tr data-row="c2l-fri">
           <td><div class="day-label">Friday</div><div class="day-date">Aug 7</div></td>
-          <td>
-            <div class="cong-name">North Oak Park</div>
-          </td>
-          <td><span class="badge badge-green">✓ Confirmed</span></td>
+          <td><div class="cong-name">North Oak Park</div></td>
+          <td><span class="badge badge-green" data-badge="c2l-fri-badge" onclick="toggleBadge(this)">✓ Confirmed</span></td>
         </tr>
-        <tr>
+        <tr data-row="c2l-sat">
           <td><div class="day-label">Saturday</div><div class="day-date">Aug 8</div></td>
-          <td>
-            <div class="cong-name">South Oak Park or Van Buren</div>
-            <div class="cong-lead">Both confirmed — day TBD</div>
-          </td>
-          <td><span class="badge badge-green">✓ Confirmed</span></td>
+          <td><div class="cong-name">South Oak Park or Van Buren</div><div class="cong-lead">Both confirmed — day TBD</div></td>
+          <td><span class="badge badge-green" data-badge="c2l-sat-badge" onclick="toggleBadge(this)">✓ Confirmed</span></td>
         </tr>
       </tbody>
     </table>
@@ -644,9 +625,9 @@
   <div class="section-header">
     <span class="section-icon">☕</span>
     <span class="section-title">Class 2 — Breakfasts</span>
-    <span class="section-sub">Provided by Class 1 congregations · Details TBD</span>
+    <span class="section-sub">Provided by Class 1 congregations · details TBD</span>
   </div>
-  <div class="class-block" style="padding: 24px 18px; color: var(--muted); font-size: 13px; font-family: 'JetBrains Mono', monospace;">
+  <div class="class-block" style="padding: 20px 18px; color: var(--muted); font-size: 13px; font-family: 'JetBrains Mono', monospace;">
     Assignments not yet determined — details pending Class 2 coordination
   </div>
 
@@ -656,84 +637,96 @@
     <span class="section-title">Open Items</span>
     <span class="section-sub" id="open-count">loading...</span>
   </div>
-  <div class="open-items-grid">
-    <div class="open-item urgent">
-      <div class="open-item-dot" style="border-color: var(--red);"></div>
+  <div class="open-items-grid" id="open-items">
+
+    <div class="open-item urgent" data-item="item-elmwood" onclick="toggleItem(this)">
+      <div class="item-checkbox"></div>
       <div>
         <div class="open-item-text">Get Elmwood Park Tuesday menu</div>
         <div class="open-item-sub">Glen Crayton Jr. · (708) 420-1429</div>
       </div>
     </div>
-    <div class="open-item medium">
-      <div class="open-item-dot" style="border-color: var(--yellow);"></div>
+
+    <div class="open-item medium" data-item="item-c1b-assign" onclick="toggleItem(this)">
+      <div class="item-checkbox"></div>
       <div>
         <div class="open-item-text">Assign Class 1 breakfasts — Mon, Tue, Wed, Sat</div>
         <div class="open-item-sub">4 days still unassigned</div>
       </div>
     </div>
-    <div class="open-item medium">
-      <div class="open-item-dot" style="border-color: var(--yellow);"></div>
+
+    <div class="open-item medium" data-item="item-c2l-days" onclick="toggleItem(this)">
+      <div class="item-checkbox"></div>
       <div>
         <div class="open-item-text">Assign specific days to Class 2 lunch congos</div>
         <div class="open-item-sub">Hawthorne Sq, Norwood Park, Van Buren, South Oak Park</div>
       </div>
     </div>
-    <div class="open-item medium">
-      <div class="open-item-dot" style="border-color: var(--yellow);"></div>
+
+    <div class="open-item medium" data-item="item-proviso" onclick="toggleItem(this)">
+      <div class="item-checkbox"></div>
       <div>
         <div class="open-item-text">Hear back from Proviso — Larry Collins</div>
         <div class="open-item-sub">Last unconfirmed Class 2 congregation</div>
       </div>
     </div>
-    <div class="open-item low">
-      <div class="open-item-dot"></div>
+
+    <div class="open-item low" data-item="item-c2b-assign" onclick="toggleItem(this)">
+      <div class="item-checkbox"></div>
       <div>
         <div class="open-item-text">Assign Class 2 breakfast arrangements</div>
         <div class="open-item-sub">Aug 3–8 · Class 1 congs provide</div>
       </div>
     </div>
-    <div class="open-item low">
-      <div class="open-item-dot"></div>
+
+    <div class="open-item low" data-item="item-lunch-instructions" onclick="toggleItem(this)">
+      <div class="item-checkbox"></div>
       <div>
         <div class="open-item-text">Send formal lunch instructions to all confirmed congos</div>
         <div class="open-item-sub">Draft ready</div>
       </div>
     </div>
-    <div class="open-item low">
-      <div class="open-item-dot"></div>
+
+    <div class="open-item low" data-item="item-onsite-email" onclick="toggleItem(this)">
+      <div class="item-checkbox"></div>
       <div>
         <div class="open-item-text">Send onsite meeting email to Davenport + King</div>
         <div class="open-item-sub">Draft ready</div>
       </div>
     </div>
-    <div class="open-item low">
-      <div class="open-item-dot"></div>
+
+    <div class="open-item low" data-item="item-douglas-lead" onclick="toggleItem(this)">
+      <div class="item-checkbox"></div>
       <div>
         <div class="open-item-text">ID lead brother for Douglas Park (Fri Jun 26)</div>
         <div class="open-item-sub">Currently TBD</div>
       </div>
     </div>
-    <div class="open-item low">
-      <div class="open-item-dot"></div>
+
+    <div class="open-item low" data-item="item-ventilation" onclick="toggleItem(this)">
+      <div class="item-checkbox"></div>
       <div>
         <div class="open-item-text">Confirm CO hall entry + ventilation</div>
         <div class="open-item-sub">Contact: David Meaux (Bellwood CBOE)</div>
       </div>
     </div>
-    <div class="open-item low">
-      <div class="open-item-dot"></div>
+
+    <div class="open-item low" data-item="item-av-details" onclick="toggleItem(this)">
+      <div class="item-checkbox"></div>
       <div>
         <div class="open-item-text">Verify AV details with Kent Minor</div>
         <div class="open-item-sub">Jun 21 delivery confirmed</div>
       </div>
     </div>
-    <div class="open-item low">
-      <div class="open-item-dot"></div>
+
+    <div class="open-item low" data-item="item-audio-scope" onclick="toggleItem(this)">
+      <div class="item-checkbox"></div>
       <div>
         <div class="open-item-text">Confirm audio broadcast doesn't reach restrooms/foyers/outside</div>
         <div class="open-item-sub">School area only</div>
       </div>
     </div>
+
   </div>
 
   <!-- NOT PARTICIPATING -->
@@ -751,17 +744,109 @@
     </div>
   </div>
 
-</div><!-- /container -->
+</div>
 
 <footer>
   pioneer-service-school-2026 · coordinator-hub · for internal use only
 </footer>
 
-<script>
-  // Count open items
-  const items = document.querySelectorAll('.open-item');
-  document.getElementById('open-count').textContent = items.length + ' items remaining';
-</script>
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
+<script>
+const STORAGE_KEY = 'ps2026-state';
+
+function getState() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+  catch { return {}; }
+}
+function saveState(state) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+// ── OPEN ITEMS ──────────────────────────────────────────────
+function toggleItem(el) {
+  const key = el.dataset.item;
+  const state = getState();
+  const checked = !el.classList.contains('checked');
+  el.classList.toggle('checked', checked);
+  state[key] = checked;
+  saveState(state);
+  updateProgress();
+  showToast(checked ? '✓ Marked complete' : 'Reopened');
+}
+
+function restoreItems() {
+  const state = getState();
+  document.querySelectorAll('.open-item[data-item]').forEach(el => {
+    if (state[el.dataset.item]) el.classList.add('checked');
+  });
+}
+
+function updateProgress() {
+  const all = document.querySelectorAll('.open-item[data-item]');
+  const done = document.querySelectorAll('.open-item[data-item].checked');
+  const total = all.length;
+  const count = done.length;
+  const pct = total ? Math.round((count / total) * 100) : 0;
+  document.getElementById('progress-label').textContent = count + ' / ' + total + ' done';
+  document.getElementById('progress-fill').style.width = pct + '%';
+  const openLabel = (total - count) + ' item' + (total - count !== 1 ? 's' : '') + ' remaining';
+  document.getElementById('open-count').textContent = openLabel;
+}
+
+// ── BADGES ──────────────────────────────────────────────────
+const BADGE_CYCLE = [
+  { cls: 'badge-green',  text: '✓ Done' },
+  { cls: 'badge-muted',  text: '⏳ Pending' },
+  { cls: 'badge-yellow', text: '⚠ In progress' },
+];
+const BADGE_CONFIRMED = { cls: 'badge-green', text: '✓ Confirmed' };
+const BADGE_MENU_IN   = { cls: 'badge-green', text: '✓ Menu in' };
+
+function toggleBadge(el) {
+  const key = 'badge-' + el.dataset.badge;
+  const state = getState();
+  // Cycle through: green → muted → yellow → green
+  const classes = ['badge-green','badge-muted','badge-yellow','badge-red'];
+  const labels  = ['✓ Done', '⏳ Pending', '⚠ In progress', '✗ Not done'];
+  const cur = classes.findIndex(c => el.classList.contains(c));
+  const next = (cur + 1) % 3; // cycle 3 states (skip red)
+  classes.forEach(c => el.classList.remove(c));
+  el.classList.add(classes[next]);
+  el.textContent = labels[next];
+  state[key] = { cls: classes[next], text: labels[next] };
+  saveState(state);
+  showToast('Status updated');
+}
+
+function restoreBadges() {
+  const state = getState();
+  document.querySelectorAll('.badge[data-badge]').forEach(el => {
+    const key = 'badge-' + el.dataset.badge;
+    if (state[key]) {
+      const { cls, text } = state[key];
+      ['badge-green','badge-muted','badge-yellow','badge-red'].forEach(c => el.classList.remove(c));
+      el.classList.add(cls);
+      el.textContent = text;
+    }
+  });
+}
+
+// ── TOAST ────────────────────────────────────────────────────
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 1600);
+}
+
+// ── INIT ─────────────────────────────────────────────────────
+restoreItems();
+restoreBadges();
+updateProgress();
+</script>
 </body>
 </html>
