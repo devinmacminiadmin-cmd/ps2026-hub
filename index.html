@@ -585,38 +585,45 @@
         <tr>
           <th style="width:100px">Day</th>
           <th>Congregation</th>
-          <th style="width:150px">Status</th>
+          <th class="menu-col">Menu</th>
+          <th style="width:130px">Status</th>
         </tr>
       </thead>
       <tbody>
         <tr data-row="c2l-mon">
           <td><div class="day-label">Monday</div><div class="day-date">Aug 3</div></td>
-          <td><div class="cong-name">Hawthorne Square</div><div class="cong-lead">Day TBD</div></td>
-          <td><span class="badge badge-green" data-badge="c2l-mon-badge" onclick="toggleBadge(this)">✓ Confirmed</span></td>
+          <td><div class="cong-name">Hawthorne Square</div><div class="cong-lead">Ken Sweeney</div></td>
+          <td class="menu-col"><div class="menu-text">Italian beef &amp; gravy, bread, peppers, fried chicken, pasta, potatoes, salad, mini cannolis</div></td>
+          <td><span class="badge badge-green" data-badge="c2l-mon-badge" onclick="toggleBadge(this)">✓ Menu in</span></td>
         </tr>
         <tr data-row="c2l-tue">
           <td><div class="day-label">Tuesday</div><div class="day-date">Aug 4</div></td>
-          <td><div class="cong-name">TBD — to assign</div></td>
-          <td><span class="badge badge-muted" data-badge="c2l-tue-badge" onclick="toggleBadge(this)">⏳ Pending</span></td>
+          <td><div class="cong-name">Proviso</div><div class="cong-lead">Larry Collins</div></td>
+          <td class="menu-col"><div class="menu-text"><em style="color:#999;">Awaiting menu</em></div></td>
+          <td><span class="badge badge-green" data-badge="c2l-tue-badge" onclick="toggleBadge(this)">✓ Confirmed</span></td>
         </tr>
         <tr data-row="c2l-wed">
           <td><div class="day-label">Wednesday</div><div class="day-date">Aug 5</div></td>
-          <td><div class="cong-name">Norwood Park</div><div class="cong-lead">Day TBD</div></td>
-          <td><span class="badge badge-green" data-badge="c2l-wed-badge" onclick="toggleBadge(this)">✓ Confirmed</span></td>
+          <td><div class="cong-name">Norwood Park</div><div class="cong-lead">Mike Guarino</div></td>
+          <td class="menu-col"><div class="menu-text">Sausage &amp; green peppers, chicken parmigiana, baked mostaccioli, roasted potatoes, green beans, salad, fruit, desserts</div></td>
+          <td><span class="badge badge-green" data-badge="c2l-wed-badge" onclick="toggleBadge(this)">✓ Menu in</span></td>
         </tr>
         <tr data-row="c2l-thu">
           <td><div class="day-label">Thursday</div><div class="day-date">Aug 6</div></td>
-          <td><div class="cong-name">TBD — to assign</div></td>
-          <td><span class="badge badge-muted" data-badge="c2l-thu-badge" onclick="toggleBadge(this)">⏳ Pending</span></td>
+          <td><div class="cong-name">Pulaski Park</div><div class="cong-lead">Jimmy Davenport</div></td>
+          <td class="menu-col"><div class="menu-text">Burrito Bowls: Chicken, Steak, Cilantro Lime Rice, Black Beans, Cheese, Lettuce, Salsa, Guacamole</div></td>
+          <td><span class="badge badge-green" data-badge="c2l-thu-badge" onclick="toggleBadge(this)">✓ Menu in</span></td>
         </tr>
         <tr data-row="c2l-fri">
           <td><div class="day-label">Friday</div><div class="day-date">Aug 7</div></td>
-          <td><div class="cong-name">North Oak Park</div></td>
-          <td><span class="badge badge-green" data-badge="c2l-fri-badge" onclick="toggleBadge(this)">✓ Confirmed</span></td>
+          <td><div class="cong-name">North Oak Park</div><div class="cong-lead">Duane Adams (773) 355-9655 · Ty Jones (773) 940-7880</div></td>
+          <td class="menu-col"><div class="menu-text">Orange Chicken, Steamed Rice, Vegetable Egg Rolls, Beef Broccoli, Crab Rangoons, Kung Pao Chicken, Vegetable Fried Rice</div></td>
+          <td><span class="badge badge-green" data-badge="c2l-fri-badge" onclick="toggleBadge(this)">✓ Menu in</span></td>
         </tr>
         <tr data-row="c2l-sat">
           <td><div class="day-label">Saturday</div><div class="day-date">Aug 8</div></td>
-          <td><div class="cong-name">South Oak Park or Van Buren</div><div class="cong-lead">Both confirmed — day TBD</div></td>
+          <td><div class="cong-name">South Oak Park</div><div class="cong-lead">Lee Harris</div></td>
+          <td class="menu-col"><div class="menu-text"><em style="color:#999;">Awaiting menu</em></div></td>
           <td><span class="badge badge-green" data-badge="c2l-sat-badge" onclick="toggleBadge(this)">✓ Confirmed</span></td>
         </tr>
       </tbody>
@@ -627,10 +634,50 @@
   <div class="section-header">
     <span class="section-icon">☕</span>
     <span class="section-title">Class 2 — Breakfasts</span>
-    <span class="section-sub">Provided by Class 1 congregations · details TBD</span>
+    <span class="section-sub">August 3–8 · provided by Class 1 congregations · click to confirm</span>
   </div>
-  <div class="class-block" style="padding: 20px 18px; color: var(--muted); font-size: 13px; font-family: 'JetBrains Mono', monospace;">
-    Assignments not yet determined — details pending Class 2 coordination
+  <div class="class-block">
+    <table class="meal-table">
+      <thead>
+        <tr>
+          <th style="width:100px">Day</th>
+          <th>Congregation</th>
+          <th style="width:150px">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-row="c2b-mon">
+          <td><div class="day-label">Monday</div><div class="day-date">Aug 3</div></td>
+          <td><div class="cong-name">Bellwood</div><div class="cong-lead">Bro. Damiano Trupiano</div></td>
+          <td><span class="badge badge-yellow" data-badge="c2b-mon-badge" onclick="toggleBadge(this)">⚠ Pending confirm</span></td>
+        </tr>
+        <tr data-row="c2b-tue">
+          <td><div class="day-label">Tuesday</div><div class="day-date">Aug 4</div></td>
+          <td><div class="cong-name">Elmwood Park</div><div class="cong-lead">Glen Crayton Jr.</div></td>
+          <td><span class="badge badge-yellow" data-badge="c2b-tue-badge" onclick="toggleBadge(this)">⚠ Pending confirm</span></td>
+        </tr>
+        <tr data-row="c2b-wed">
+          <td><div class="day-label">Wednesday</div><div class="day-date">Aug 5</div></td>
+          <td><div class="cong-name">Carol Stream</div><div class="cong-lead">Gary Stanford</div></td>
+          <td><span class="badge badge-yellow" data-badge="c2b-wed-badge" onclick="toggleBadge(this)">⚠ Pending confirm</span></td>
+        </tr>
+        <tr data-row="c2b-thu">
+          <td><div class="day-label">Thursday</div><div class="day-date">Aug 6</div></td>
+          <td><div class="cong-name">Addison</div><div class="cong-lead">John Thompson</div></td>
+          <td><span class="badge badge-yellow" data-badge="c2b-thu-badge" onclick="toggleBadge(this)">⚠ Pending confirm</span></td>
+        </tr>
+        <tr data-row="c2b-fri">
+          <td><div class="day-label">Friday</div><div class="day-date">Aug 7</div></td>
+          <td><div class="cong-name">Douglas Park</div><div class="cong-lead">Lead TBD</div></td>
+          <td><span class="badge badge-yellow" data-badge="c2b-fri-badge" onclick="toggleBadge(this)">⚠ Pending confirm</span></td>
+        </tr>
+        <tr data-row="c2b-sat">
+          <td><div class="day-label">Saturday</div><div class="day-date">Aug 8</div></td>
+          <td><div class="cong-name">Broadview</div><div class="cong-lead">Bro. Neal</div></td>
+          <td><span class="badge badge-yellow" data-badge="c2b-sat-badge" onclick="toggleBadge(this)">⚠ Pending confirm</span></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
   <!-- OPEN ITEMS -->
@@ -733,7 +780,7 @@
 </div>
 
 <footer>
-  pioneer-service-school-2026 · coordinator-hub · for internal use only
+  pioneer-service-school-2026 · coordinator-hub · last updated Jul 19, 2026 · for internal use only
 </footer>
 
 <!-- TOAST -->
