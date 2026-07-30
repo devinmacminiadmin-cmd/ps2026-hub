@@ -768,6 +768,15 @@
 
   </div>
 
+  <!-- BREAKFAST NOTE -->
+  <div class="section-header">
+    <span class="section-icon">📋</span>
+    <span class="section-title">Breakfast — Onsite Note</span>
+  </div>
+  <div style="background: var(--yellow-bg); border: 1px solid var(--yellow-border); border-radius: 10px; padding: 14px 18px; font-size: 13px; color: var(--yellow);">
+    <strong>Water jugs required:</strong> All congregations bringing breakfast should also bring gallon jugs of water to fill the coffee pots. Please remind your breakfast lead before their assigned day.
+  </div>
+
   <!-- NOT PARTICIPATING -->
   <div class="section-header">
     <span class="section-icon">🚫</span>
@@ -846,12 +855,14 @@ const BADGE_MENU_IN   = { cls: 'badge-green', text: '✓ Menu in' };
 function toggleBadge(el) {
   const key = 'badge-' + el.dataset.badge;
   const state = getState();
-  // Cycle through: green → muted → yellow → green
-  const classes = ['badge-green','badge-muted','badge-yellow','badge-red'];
-  const labels  = ['✓ Done', '⏳ Pending', '⚠ In progress', '✗ Not done'];
-  const cur = classes.findIndex(c => el.classList.contains(c));
-  const next = (cur + 1) % 3; // cycle 3 states (skip red)
-  classes.forEach(c => el.classList.remove(c));
+  // Cycle: Confirmed → Done → Pending → In progress → Confirmed
+  const classes = ['badge-green','badge-green','badge-muted','badge-yellow'];
+  const labels  = ['✓ Confirmed', '✓ Done',    '⏳ Pending', '⚠ In progress'];
+  const curText = el.textContent.trim();
+  let cur = labels.indexOf(curText);
+  if (cur === -1) cur = 0; // default to Confirmed if unrecognized
+  const next = (cur + 1) % labels.length;
+  ['badge-green','badge-muted','badge-yellow','badge-red'].forEach(c => el.classList.remove(c));
   el.classList.add(classes[next]);
   el.textContent = labels[next];
   state[key] = { cls: classes[next], text: labels[next] };
